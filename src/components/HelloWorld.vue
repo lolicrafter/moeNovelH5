@@ -22,7 +22,7 @@ export default {
       }
     )
     function changeInfo() {
-      name.value = '胡桃'
+      name.value = '神里凌华,胡桃,'
       character.value = '妻子'
       job.class = '往生堂'
       job.type = '堂主'
