@@ -1,43 +1,25 @@
-name: buildAndDeploy
-
-env:
-  TZ: Asia/Shanghai
-
+name: GitHub Actions Build and Deploy
 on:
-  # 当master分支提交时
   push:
     branches:
       - master
-
-# 开始任务
 jobs:
-  main:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
         with:
-          node-version: '12'
+          persist-credentials: false
 
-      # 安装和构建
-      - name: Install and Build
+      - name: Install and Build 🔧
         run: |
           yarn
-          yarn run build
-
-      - name: Update dist folder to repository
-        env:
-          # 仓库用户名
-          REPO_USERNAME: "lolicrafter"
-          # GitHub Pages仓库名
-          DIST_REPO: "vue3"
-          # GitHub Token
-          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
-
-        run: |
-          git config --global user.email "lolicraftlove@gmail.com"
-          git config --global user.name "lolicrafter"
-
-          cd dist && git init && git add .
-          git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
-          git push --force --quiet "https://$GITHUB_TOKEN@github.com/$REPO_USERNAME/$DIST_REPO.git" master:master
+          yarn build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist
+          CLEAN: true
