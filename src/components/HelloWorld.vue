@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 export default {
   name: "HelloWorld",
   props: {
@@ -22,11 +22,15 @@ export default {
       }
     )
     function changeInfo() {
-      name.value = '神里凌华,胡桃,'
+      name.value = '胡桃,'
       character.value = '妻子'
       job.class = '往生堂'
       job.type = '堂主'
     }
+
+    watch(job,(a)=>{
+      console.log('job  watch结果===>',a)
+    })
     return {
       name,
       character,
