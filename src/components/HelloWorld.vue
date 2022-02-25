@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { computed, watchEffect } from "vue";
+import { computed, inject, watchEffect } from "vue";
 import { useRouter } from 'vue-router';
 export default {
   name: "HelloWorld",
@@ -36,6 +36,8 @@ export default {
         context.emit("update:num", v);
       },
     });
+    const wifu = inject('wifu')
+    console.log('wifu结果===>',wifu)
     watchEffect(() => {
       // const numSet1 = props.num;
       console.log("numSet结果===>", props);

@@ -12,6 +12,8 @@ router.beforeEach((to, from, next) => {
     /* 路由发生变化修改页面title */
     if (to.meta.title || to.query.title) {
         document.title = to.meta.title || to.query.title
+    }else{
+        document.title = '往生堂胡桃'
     }
     next()
 })
