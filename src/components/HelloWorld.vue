@@ -14,7 +14,7 @@ export default {
   },
   setup() {
     let name = ref('神里凌华')
-    let character = ref('女友')
+    let character = ref('白鹭公主')
     let job = reactive(
       {
         type:'公主',
@@ -23,7 +23,7 @@ export default {
     )
     function changeInfo() {
       name.value = '胡桃,'
-      character.value = '妻子'
+      character.value = '堂主'
       job.class = '往生堂'
       job.type = '堂主'
     }
