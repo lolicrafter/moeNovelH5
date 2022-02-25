@@ -33,7 +33,13 @@ module.exports = {
 
     productionSourceMap: false, // 调整内部的webpack配置. // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
 
-    chainWebpack: () => {},
+    chainWebpack: (config) => {
+        //设置index.html  的title   
+        config.plugin('html').tap(args => {
+            args[0].title = '往生堂胡桃'
+            return args
+        })
+    },
 
     configureWebpack: () => {}, // CSS 相关选项
 
@@ -42,13 +48,13 @@ module.exports = {
 
         // 也可以是传递给 extract-text-webpack-plugin 的选项对象
 
-        extract: true, // 允许生成 CSS source maps?
+        // extract: true, // 允许生成 CSS source maps?
 
         sourceMap: false, // pass custom options to pre-processor loaders. e.g. to pass options to // sass-loader, use { sass: { ... } }
 
         loaderOptions: {}, // Enable CSS modules for all css / pre-processor files. // This option does not affect *.vue files.
 
-        requireModuleExtension: false
+        requireModuleExtension: true
     }, // use thread-loader for babel & TS in production build // enabled by default if the machine has more than 1 cores
 
     parallel: require("os").cpus().length > 1, // PWA 插件相关配置 // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa

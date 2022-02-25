@@ -1,43 +1,76 @@
 <template>
   <div class="container">
-    <h2>{{name}}是我的{{character}}，她是{{job.class}}{{job.type}}</h2>
-    <h5><button @click="changeInfo">更改身份</button></h5>
+    <el-button type="primary" @click="goTiny">前往tiny</el-button>
+    <hr />
+    <el-button type="primary" @click="numSet += 1">添加客户</el-button>
+    <br /><br /><br />
+    <el-button type="success">Success</el-button>
+
+    <hr />
+    <slot name="slotA">slotA</slot>
+    <!-- <h3>{{msg}}</h3> -->
+    <!-- <h2>{{name}}是我的{{character}}，她是{{job.class}}{{job.type}}</h2> -->
+    <!-- <h5><button @click="changeInfo">更改身份</button></h5> -->
   </div>
 </template>
 
 <script>
-import { reactive, ref, watch } from "vue";
+import { computed, watchEffect } from "vue";
+import { useRouter } from 'vue-router';
 export default {
   name: "HelloWorld",
   props: {
-    ms: String,
+    msg: String,
+    num: Number,
   },
-  setup() {
-    let name = ref('神里凌华')
-    let character = ref('白鹭公主')
-    let job = reactive(
-      {
-        type:'公主',
-        class:'贵族'
-      }
-    )
-    function changeInfo() {
-      name.value = '胡桃,'
-      character.value = '堂主'
-      job.class = '往生堂'
-      job.type = '堂主'
+  emits: ["update:num"],
+  setup(props, context) {
+    //计算属性——完整
+    let numSet = computed({
+      get() {
+        return props.num;
+      },
+      set(v) {
+        // console.log("set结果===>", v);
+        // console.log("context结果===>", context);
+        context.emit("update:num", v);
+      },
+    });
+    watchEffect(() => {
+      // const numSet1 = props.num;
+      console.log("numSet结果===>", props);
+    });
+    const router = useRouter()
+    function goTiny() {
+      router.push({ path: "/tiny", query: { title: "tiny页面" } });
     }
-
-    watch(job,(a)=>{
-      console.log('job  watch结果===>',a)
-    })
+    // let name = ref('神里凌华')
+    // let character = ref('白鹭公主')
+    // let job = reactive(
+    //   {
+    //     type:'公主',
+    //     class:'贵族'
+    //   }
+    // )
+    // console.log('props.msg结果===>',props.msg)
+    // function changeInfo() {
+    //   name.value = '胡桃,'
+    //   character.value = '堂主'
+    //   job.class = '往生堂'
+    //   job.type = '堂主'
+    // }
+    // watch(job,(a)=>{
+    //   console.log('job  watch结果===>',a)
+    // })
     return {
-      name,
-      character,
-      changeInfo,
-      job
-    }
-  }
+      numSet,
+      goTiny,
+      // name,
+      // character,
+      // changeInfo,
+      // job
+    };
+  },
 };
 </script>
 
