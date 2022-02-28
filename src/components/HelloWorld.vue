@@ -2,7 +2,7 @@
   <div class="container">
     <el-button type="primary" @click="goTiny">前往tiny</el-button>
     <hr />
-    <el-button type="primary" @click="numSet += 1">添加客户</el-button>
+    <el-button type="primary" @click="addPerson">添加客户</el-button>
     <br /><br /><br />
     <el-button type="success">Success</el-button>
 
@@ -16,7 +16,7 @@
 
 <script>
 import { computed, inject, watchEffect } from "vue";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 export default {
   name: "HelloWorld",
   props: {
@@ -36,15 +36,18 @@ export default {
         context.emit("update:num", v);
       },
     });
-    const wifu = inject('wifu')
-    console.log('wifu结果===>',wifu)
+    const wifu = inject("wifu");
+    console.log("wifu结果===>", wifu);
     watchEffect(() => {
       // const numSet1 = props.num;
       console.log("numSet结果===>", props);
     });
-    const router = useRouter()
+    const router = useRouter();
     function goTiny() {
       router.push({ path: "/tiny", query: { title: "tiny页面" } });
+    }
+    function addPerson() {
+      numSet.value += 1;
     }
     // let name = ref('神里凌华')
     // let character = ref('白鹭公主')
@@ -67,6 +70,7 @@ export default {
     return {
       numSet,
       goTiny,
+      addPerson,
       // name,
       // character,
       // changeInfo,

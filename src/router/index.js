@@ -4,8 +4,13 @@ import {
 } from 'vue-router'
 import Home from '../views/Home.vue'
 
-const routes = [{
+const routes = [
+  {
     path: '/',
+    redirect:'/eldenRingMap'
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home,
     // meta:{title:"首页"},
@@ -21,6 +26,12 @@ const routes = [{
     name: 'About',
     component: () => import( /* webpackChunkName: "about" */ '@/views/About.vue'),
     // meta:{title:"关于"},
+  },
+  {
+    path: '/eldenRingMap',
+    name: 'EldenRingMap',
+    component: () => import( /* webpackChunkName: "about" */ '@/views/eldenRingMap.vue'),
+    meta:{title:"艾尔登法环地图"}
   }
 ]
 
