@@ -5,7 +5,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementPlus from 'element-plus'
+import * as Icons  from '@element-plus/icons-vue/dist/index.js'
 import 'element-plus/dist/index.css'
+const app = createApp(App)
 
 
 import OpenLayersMap from 'vue3-openlayers'
@@ -23,5 +25,8 @@ router.beforeEach((to, from, next) => {
     }
     next()
 })
-
-createApp(App).use(store).use(router).use(ElementPlus).use(OpenLayersMap).mount('#app')
+// 注册Icons 全局组件
+Object.keys(Icons).forEach(key => {
+    app.component(key, Icons[key])
+  })
+app.use(store).use(router).use(ElementPlus).use(OpenLayersMap).mount('#app')
