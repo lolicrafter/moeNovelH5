@@ -7,7 +7,8 @@ import Home from '../views/Home.vue'
 const routes = [
   {
     path: '/',
-    redirect:'/eldenRingMap'
+    redirect:'/home'
+    // redirect:'/eldenRingMap'
   },
   {
     path: '/home',

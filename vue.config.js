@@ -1,3 +1,5 @@
+const compressionPlugin = require('compression-webpack-plugin')
+
 module.exports = {
     /** 区分打包环境与开发环境
      * process.env.NODE_ENV==='production'  (打包环境)
@@ -39,6 +41,12 @@ module.exports = {
             args[0].title = '往生堂胡桃'
             return args
         })
+        config.plugin('compressionPlugin').use(new compressionPlugin({
+            test: /\.(js|css|less)$/, // 匹配文件名
+            threshold: 10240, // 对超过10k的数据压缩
+            minRatio: 0.8,
+            deleteOriginalAssets: true // 删除源文件
+        }))
     },
 
     configureWebpack: () => {}, // CSS 相关选项

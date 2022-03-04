@@ -17,7 +17,10 @@
 import helloWorld from '@/components/HelloWorld.vue'
 import helloWorld1 from '@/components/HelloWorld1.vue'
 import { reactive, ref } from '@vue/reactivity'
-import { provide } from '@vue/runtime-core'
+import { onMounted, provide } from '@vue/runtime-core'
+// import {fetchUserList} from '@/api/index'
+// const {fetchUserList} = require('@/api/index')
+import * as Api from '@/api/index'
 export default {
   name: 'Home',
   components: {
@@ -32,6 +35,9 @@ export default {
        console.log('son结果===>',son)
        son.value.addPerson()
      } 
+     onMounted(() => {
+       Api.fetchUserList()
+     })
      return {
        num,
        son,

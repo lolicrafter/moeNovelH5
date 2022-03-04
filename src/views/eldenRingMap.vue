@@ -264,10 +264,14 @@ export default defineComponent({
   position: absolute;
   top: 0;
   left: 0;
-}
-.mapBox {
   cursor: crosshair;
+  // cursor:url('https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg')
+
 }
+// .container {
+  // cursor:url('/assets/pointer.ico')
+  // cursor: crosshair;
+// }
 .title-bar {
   display: flex;
   align-items: center;
