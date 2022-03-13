@@ -7,8 +7,14 @@ import Home from '../views/Home.vue'
 const routes = [
   {
     path: '/',
-    redirect:'/home'
+    redirect:'/index'
     // redirect:'/eldenRingMap'
+  },
+  {
+    path: '/index',
+    name: 'Index',
+    component: () => import('@/views/index.vue'),
+    // meta:{title:"首页"},
   },
   {
     path: '/home',

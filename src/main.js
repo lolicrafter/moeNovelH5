@@ -15,16 +15,16 @@ import 'vue3-openlayers/dist/vue3-openlayers.css'
 
 
 console.log('process.env==>', process.env)
-router.beforeEach((to, from, next) => {
-    console.log('to结果===>', to)
-    /* 路由发生变化修改页面title */
-    if (to.meta.title || to.query.title) {
-        document.title = to.meta.title || to.query.title
-    }else{
-        document.title = '往生堂胡桃'
-    }
-    next()
-})
+// router.beforeEach((to, from, next) => {
+//     console.log('to结果===>', to)
+//     /* 路由发生变化修改页面title */
+//     if (to.meta.title || to.query.title) {
+//         document.title = to.meta.title || to.query.title
+//     }else{
+//         document.title = '往生堂胡桃'
+//     }
+//     next()
+// })
 // 注册Icons 全局组件
 Object.keys(Icons).forEach(key => {
     app.component(key, Icons[key])

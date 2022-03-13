@@ -21,7 +21,7 @@ module.exports = {
 
     // 那么将这个值改为 '/my-app/'
 
-    publicPath: "./", // 构建好的文件输出到哪里
+    publicPath: process.env.NODE_ENV==='prod'?"./":'', // 构建好的文件输出到哪里
 
     outputDir: "dist", // where to put static assets (js/css/img/font/...) // 是否在保存时使用‘eslint-loader’进行检查 // 有效值: true | false | 'error' // 当设置为‘error’时，检查出的错误会触发编译失败
 
@@ -38,18 +38,30 @@ module.exports = {
     chainWebpack: (config) => {
         //设置index.html  的title   
         config.plugin('html').tap(args => {
-            args[0].title = '往生堂胡桃'
+            args[0].title = '精选小说'
             return args
         })
-        config.plugin('compressionPlugin').use(new compressionPlugin({
-            test: /\.(js|css|less)$/, // 匹配文件名
-            threshold: 10240, // 对超过10k的数据压缩
-            minRatio: 0.8,
-            deleteOriginalAssets: true // 删除源文件
-        }))
+        // config.plugin('compressionPlugin').use(new compressionPlugin({
+        //     test: /\.(js|css|less)$/, // 匹配文件名
+        //     threshold: 10240, // 对超过10k的数据压缩
+        //     minRatio: 0.8,
+        //     deleteOriginalAssets: true // 删除源文件
+        // }))
     },
 
-    configureWebpack: () => {}, // CSS 相关选项
+    configureWebpack: () => {
+        const config = {
+            // webpack 配置的项目名称, 可以在 index.html 中被访问，用来注入页面标题
+            name: '精选小说',
+            // resolve: {
+            //     fallback: {
+            //         // 默认情况下，Webpack5 不再包含用于 Node.js 模块的 polyfills，所以引入 path-browserify
+            //         path: require.resolve('path-browserify')
+            //     }
+            // }
+        };
+        return config
+    }, // CSS 相关选项
 
     css: {
         // 将组件内部的css提取到一个单独的css文件（只用在生产环境）
