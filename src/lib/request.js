@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs'
 // import {
 //     Message
 // } from 'element-ui';
@@ -12,6 +13,8 @@ const service = axios.create({
     // 超时
     timeout: 300000
 })
+console.log('baseURL结果===>',process.env.VUE_APP_URL)
+
 
 // request拦截器
 service.interceptors.request.use(
@@ -19,6 +22,11 @@ service.interceptors.request.use(
         // if (getToken()) {
         //   config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
         // }
+        if (config.method === 'get' || config.method === 'GET') {
+            config.paramsSerializer = function(params) {
+              return qs.stringify(params, { arrayFormat: 'repeat' })
+            }
+          }
         if (!config.headers.agent) {
             config.headers['agent'] = 'lolicraft'
         }

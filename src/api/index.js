@@ -6,6 +6,22 @@ const fetchArticleList = function(params) {
         params,
     })
 }
+const fetchCategoryList = function(params) {
+    return request({
+        url: 'category/list',
+        method: 'get',
+        params,
+    })
+}
+const fetchTagsList = function(params) {
+    return request({
+        url: 'tags/list',
+        method: 'get',
+        params,
+    })
+}
 export  {
-    fetchArticleList
+    fetchArticleList,
+    fetchTagsList,
+    fetchCategoryList
 }
