@@ -7,7 +7,7 @@
           placeholder="请输入小说名称"
         />
       </el-form-item>
-      <el-form-item label="小说标签" prop="tag" >
+      <el-form-item label="小说标签" prop="tag">
         <el-checkbox-group v-model="data.searchForm.tag" size="large">
           <el-checkbox-button
             v-for="(item, index) in data.tagsList"
@@ -49,6 +49,12 @@
       </div>
     </ul>
   </div>
+  <!-- <router-link :to="{ path: '/home' }">跳转</router-link> -->
+  <el-button @click="pageTo">跳转</el-button>
+  
+  <div class="footer">
+    <a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2023000693号</a>
+  </div>
 </template>
 
 <script setup>
@@ -60,6 +66,10 @@ import {
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
 //import引入的组件需要注入到对象中才能使用
 const data = reactive({
   list: [
@@ -109,9 +119,9 @@ const getList = () => {
 };
 const fetchList = (reset = true) => {
   if (reset === true) {
-    data.searchForm = JSON.parse(JSON.stringify(data.searchFormBackup))
+    data.searchForm = JSON.parse(JSON.stringify(data.searchFormBackup));
   }
-  data.searchForm.pageIndex = 1
+  data.searchForm.pageIndex = 1;
   fetchArticleList(data.searchForm).then((res) => {
     data.list = res.data;
     data.loadMore = res.data.length > 0;
@@ -125,12 +135,15 @@ const load = () => {
     data.list.push(...res.data);
   });
 };
+const pageTo = () => {
+  router.push({ path: "/home" });
+};
 getList();
 </script>
 
 <style lang="scss" scoped>
 .container {
-  .demo-form-inline{
+  .demo-form-inline {
     width: 50vw;
     // display: flex;
     // flex-direction: column;

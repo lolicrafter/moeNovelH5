@@ -38,7 +38,7 @@ module.exports = {
     chainWebpack: (config) => {
         //设置index.html  的title   
         config.plugin('html').tap(args => {
-            args[0].title = '精选小说'
+            args[0].title = '萌物书屋'
             return args
         })
         // config.plugin('compressionPlugin').use(new compressionPlugin({
@@ -52,7 +52,7 @@ module.exports = {
     configureWebpack: () => {
         const config = {
             // webpack 配置的项目名称, 可以在 index.html 中被访问，用来注入页面标题
-            name: '精选小说',
+            name: '萌物书屋',
             // resolve: {
             //     fallback: {
             //         // 默认情况下，Webpack5 不再包含用于 Node.js 模块的 polyfills，所以引入 path-browserify
