@@ -50,7 +50,7 @@
     </ul>
   </div>
   <!-- <router-link :to="{ path: '/home' }">跳转</router-link> -->
-  <el-button @click="pageTo">跳转</el-button>
+  <el-button @click="pageTo">跳转1</el-button>
   
   <div class="footer">
     <a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2023000693号</a>
