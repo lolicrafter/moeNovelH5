@@ -1,6 +1,7 @@
 # deploy.yml
 name: deploy-docker
 on:
+  workflow_dispatch:
   push:
     branches:
       -master # 上传到此分支触发
