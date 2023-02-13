@@ -1,0 +1,31 @@
+# deploy.yml
+name: deploy-docker
+on:
+  push:
+    branches:
+      -master # 上传到此分支触发
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 检查代码
+      - name: Checkout # 将仓库内master分支的内容下载到工作目录
+        uses: actions/checkout@v3 # 脚本来自 https://github.com/actions/checkout
+      # 发布
+      - name: LogintoAliyunContainerRegistry(ACR)
+        uses: aliyun/acr-login@v1 # 使用阿里云镜像服务action
+        with:
+         login-server: registry.cn-shanghai.aliyuncs.com # 务必正确填写镜像容器服务的登录地址
+         region-id: cn-hangzhou # 务必正确填写镜像容器服务的登录地址
+         username: "${{ secrets.REGISTRY_USERNAME }}" # 引用GitHub repo设置的镜像容器服务用户名
+         password: "${{ secrets.REGISTRY_PASSWORD }}" # 引用GitHub repo设置的镜像容器服务密码
+      - name: BuildandPushDockerImage
+
+        # 构建镜像并上传到阿里云容器镜像仓库 (自行百度创建自己的镜像仓库)
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+         context: .
+         push: true
+         tags: registry.cn-shanghai.aliyuncs.com/david-test-docker/david-docker-vue-web
