@@ -17,9 +17,9 @@ jobs:
         uses: docker/login-action@v1
         # 配置登录信息，secrets 变量在 github settings -> secrets 中设置
         with:
-          registry: registry.cn-shanghai.aliyuncs.com/david-test-docker/david-docker-vue-web
-          username: 929676721@qq.com
-          password: lolitacon945
+          registry: ${{ secrets.REGISTRY_PATH }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
         # 构建镜像并上传到阿里云容器镜像仓库 (自行百度创建自己的镜像仓库)
       - name: Build and push
         id: docker_build
@@ -27,4 +27,4 @@ jobs:
         with:
          context: .
          push: true
-         tags: registry.cn-shanghai.aliyuncs.com/david-test-docker/david-docker-vue-web
+         tags: ${{ secrets.REGISTRY_PATH }}
